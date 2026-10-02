@@ -1,0 +1,33 @@
+<div class="gallery-container">
+  <div class="preview-block">
+    <button class="arrow prev-preview" (click)="prevPreview()">‹</button>
+
+    <div class="main-image">
+      @if (currentImage()) {
+        <img [src]="currentImage().url" [alt]="currentImage().alt">
+      }
+    </div>
+
+    <button class="arrow next-preview" (click)="nextPreview()">›</button>
+  </div>
+
+  <div class="thumbnails-outer">
+    <button class="arrow-thumb prev-thumb" (click)="prevThumbnails()">«</button>
+
+    <div class="thumbnails-window">
+      <div class = "thumbnails-track" [style.transform]="trackTransform()">
+      @for (img of images(); track img.id; let i = $index) {
+        <div
+          class="thumb-item"
+          [class.active]="i === currentIndex()"
+          (click)="selectImage(i)">
+          <img [src]="img.url" [alt]="img.alt">
+        </div>
+      }
+      </div>
+    </div>
+
+    <button class="arrow-thumb next-thumb" (click)="nextThumbnails()">»</button>
+  </div>
+
+</div>
